@@ -124,12 +124,8 @@ const getGoodsList = (params) => {
   }
 
   if (params.category) {
-    if (!params.gender) {
-      // throw new ApiError(403, { message: "Not gender params" });
-      const category = params.category.trim().toLowerCase();
-      data = db.goods.filter((item) => category.includes(item.category));  
-    }
-
+    const category = params.category.trim().toLowerCase();
+        
     if (params.top) {
       data = data.filter(
         (item) =>
@@ -143,7 +139,7 @@ const getGoodsList = (params) => {
       }
     }
 
-    data = data.filter((item) => item.category === params.category);
+    data = db.goods.filter((item) => category.includes(item.category));
   }
 
   if (params.type) {
