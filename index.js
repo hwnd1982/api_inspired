@@ -145,7 +145,7 @@ const getGoodsList = (params) => {
 
   if (params.colors) {
     const colors = params.colors.trim().toLowerCase();
-    const colorsId = db.colors.filter(color => colors.includes(color.title)).map(item.id);
+    const colorsId = db.colors.filter(color => colors.includes(color.title)).map(color =>color.id);
     
     data = data.filter((item) =>
       item.colors.reduce((isFinded, itemColorId) =>
