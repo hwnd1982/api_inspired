@@ -92,6 +92,8 @@ const getGoodsList = (params) => {
         "top",
         "exclude",
         "colors",
+        "minprice",
+        "maxprice",
       ].includes(item)
     );
 
@@ -152,13 +154,21 @@ const getGoodsList = (params) => {
         (isFinded || colorsId.includes(itemColorId) ? true : false), false));
   }
 
+  if (params.minprice) {
+    data = data.filter((item) => item.price >= +params.minprice)
+  }
+
+  if (params.maxprice) {
+    data = data.filter((item) => item.price <= +params.maxprice)
+  }
+
   if (params.type) {
     data = data.filter((item) => item.type === params.type);
   }
 
   if (params.search) {
     const search = params.search.replaceAll("+", " ").trim().toLowerCase();
-    data = db.goods.filter((item) => {
+    data = data.filter((item) => {
       return (
         item.title.toLowerCase().includes(search) ||
         item.description.toLowerCase().includes(search)
