@@ -130,7 +130,7 @@ const getGoodsList = (params) => {
       data = data.filter(
         (item) =>
           item.top &&
-          item.category === params.category &&
+          category.includes(item.category) &&
           item.id !== params.exclude
       );
       data = shuffle(data);
@@ -140,6 +140,15 @@ const getGoodsList = (params) => {
     }
 
     data = db.goods.filter((item) => category.includes(item.category));
+  }
+
+  if (params.colors) {
+    const colors = params.colors.trim().toLowerCase();
+    const colorsId = db.colors.filter(color => colors.includes(color.title)).map(item.id);
+    
+    data = data.filter((item) =>
+      item.colors.reduce((isFinded, itemColorId) =>
+        (isFinded || colorsId.includes(itemColorId) ? true : false), false));
   }
 
   if (params.type) {
