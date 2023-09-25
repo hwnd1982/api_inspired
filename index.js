@@ -91,6 +91,7 @@ const getGoodsList = (params) => {
         "list",
         "top",
         "exclude",
+        "colors",
       ].includes(item)
     );
 
