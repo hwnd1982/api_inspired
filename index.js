@@ -86,6 +86,7 @@ const getGoodsList = (params) => {
         "count",
         "gender",
         "category",
+        "categories",
         "type",
         "search",
         "list",
@@ -127,13 +128,14 @@ const getGoodsList = (params) => {
   }
 
   if (params.category) {
-    const category = params.category.trim().toLowerCase();
-        
+    if (!params.gender) {
+      throw new ApiError(403, { message: "Not gender params" });
+    }
     if (params.top) {
       data = data.filter(
         (item) =>
           item.top &&
-          category.includes(item.category) &&
+          item.category === params.category &&
           item.id !== params.exclude
       );
       data = shuffle(data);
@@ -141,8 +143,13 @@ const getGoodsList = (params) => {
         data.length = paginationCount;
       }
     }
+    data = data.filter((item) => item.category === params.category);
+  }
 
-    data = db.goods.filter((item) => category.includes(item.category));
+  if (params.categories) {
+    const categories = params.categories.trim().toLowerCase();
+
+    data = db.goods.filter((item) => categories.includes(item.category));
   }
 
   if (params.colors) {
