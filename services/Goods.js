@@ -164,7 +164,7 @@ export default class Goods extends Db {
       return;
     }
 
-    this.page = this.page || +this.params.page || 1;
+    this.page = +this.params.page || 1;
 
     if (this.params.count === "all") {
       this.totalCount = this.data.length;
