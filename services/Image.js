@@ -12,7 +12,7 @@ export default class Image {
     this.res.statusCode = 200;
     this.res.setHeader("Content-Type", "image/jpeg");
     readFile(this.url, (err, image) => {
-      res.end(image);
+      this.res.end(image);
     });
   }
 }
