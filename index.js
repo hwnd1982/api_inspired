@@ -46,7 +46,7 @@ createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (isImg) {
-    return new Image(`${__dirname}${req.url}`, res);
+    return new Image(dbPath, res);
   }
 
   // этот заголовок ответа указывает, что тело ответа будет в JSON формате
