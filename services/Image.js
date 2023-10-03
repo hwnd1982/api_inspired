@@ -1,3 +1,5 @@
+import { readFile } from "node:fs";
+
 export default class Image {
   constructor(url, res) {
     this.url = url;
