@@ -170,12 +170,17 @@ export default class Goods extends Db {
       this.totalCount = this.data.length;
       this.pages = 1;
     } else {
-      this.paginationCount = this.paginationCount || +this.params.count || 12;
+      this.paginationCount = +this.params.count || 12;
       this.pagination();
     }
 
     res.end(JSON.stringify({list: this.data, page: this.page, pages: this.pages, totalCount: this.totalCount}));
+    
     this.data = [...this.goods];
+    this.paginationCount = 0;
+    this.page = 0;
+    this.id = 0;
+    this.params = {};
   }
 
   isKeys(params) {
