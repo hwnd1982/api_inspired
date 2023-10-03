@@ -9,6 +9,7 @@ export default class Goods extends Db {
   }
   
   filter({post: id, params}) {
+    console.log(id, params);
     if (id) {
       this.id = id;
       this.find(id)
@@ -160,6 +161,7 @@ export default class Goods extends Db {
     if (this.id) {
       super.get(res);
       this.data = [...this.goods];
+      this.id = 0;
 
       return;
     }
@@ -177,10 +179,6 @@ export default class Goods extends Db {
     res.end(JSON.stringify({list: this.data, page: this.page, pages: this.pages, totalCount: this.totalCount}));
     
     this.data = [...this.goods];
-    this.paginationCount = 0;
-    this.page = 0;
-    this.id = 0;
-    this.params = {};
   }
 
   isKeys(params) {
