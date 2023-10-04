@@ -7,12 +7,12 @@ import Categories from "./services/Categories.js";
 import Colors from "./services/Colors.js";
 import FileURLToPath from './services/FileURLToPath.js';
 import Goods from "./services/Goods.js";
-import Image from "./services/Image.js";
 import Orders from "./services/Orders.js";
 import ParserUrl from "./services/ParserUrl.js";
 import Cart from './services/Cart.js';
 import { drainJson, getParams } from './utils/utils.js';
 import { printInstructions } from './utils/printInstructions.js';
+import { readFile } from 'fs';
 
 const PORT = process.env.PORT || 8024;
 const URL_GOODS_PREFIX = process.env.URL_GOODS_PREFIX;
@@ -46,7 +46,12 @@ createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (isImg) {
-    return new Image(`${dbPath.__dirname}${req.url}`, res);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "image/jpeg");
+    readFile(`${dbPath.__dirname}${req.url}`, (err, image) => {
+      res.end(image);
+    });
+    return;
   }
 
   // этот заголовок ответа указывает, что тело ответа будет в JSON формате

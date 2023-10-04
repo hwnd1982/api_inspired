@@ -14,6 +14,10 @@ export default class FileURLToPath {
     this.__dirname = path;
   }
 
+  getImg(url) {
+    return path.resolve(this.__dirname, url)
+  }
+
   get db () {
     return path.resolve(this.__dirname, DB_PATH);
   }

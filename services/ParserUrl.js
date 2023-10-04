@@ -16,7 +16,8 @@ export default class ParserUrl {
   get isImg() {
     // req - объект с информацией о запросе, res - объект для управления отправляемым ответом
     // чтобы не отклонять uri с img
-    return this.url.substring(1, 4) === URL_IMG_PREFIX;
+    console.log(this.url, this.url.substring(1, 4));
+    return this.url.substring(1, 4).includes(URL_IMG_PREFIX);
   }
 
   get isCategories() {
