@@ -13,7 +13,7 @@ export default class Cart extends Db {
   setTotal() {
     const { totalPrice, totalCount } = this.data.list.reduce(
       ({ totalPrice, totalCount }, { id, count }) => ({
-        totalPrice: totalPrice + this.data.prodicts[id].price * count,
+        totalPrice: totalPrice + this.data.products[id].price * count,
         totalCount: totalCount + count,
       }),
       { totalPrice: 0, totalCount: 0 },
@@ -37,13 +37,13 @@ export default class Cart extends Db {
       this.data.list.splice(itemIndex, 1);
 
       if (!this.data.list.find(item => item.id === data.id)) {
-        for (const key in this.data.prodicts) {
+        for (const key in this.data.products) {
           if (key !== data.id) {
-            newProducts[key] = this.data.prodicts[key];
+            newProducts[key] = this.data.products[key];
           }
         }
 
-        this.data.prodicts = newProducts;
+        this.data.products = newProducts;
       }
     }
 
@@ -60,12 +60,12 @@ export default class Cart extends Db {
           item.color === data.color &&
           item.size === data.size,
       ) || null;
-    const prodict = this.data.prodicts[data.id];
+    const prodict = this.data.products[data.id];
 
     if (!prodict) {
       const { id, title, price, pic } = this.goods.find(item => item.id === data.id);
 
-      this.data.prodicts[id] = { title, price, pic };
+      this.data.products[id] = { title, price, pic };
     }
 
     if (!item) {
