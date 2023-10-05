@@ -48,8 +48,7 @@ export default class Cart extends Db {
     }
 
     await this.write();
-    res.statusCode = 204;
-    res.end();
+    this.get(res);
   }
 
   async add(data, res) {
@@ -77,7 +76,7 @@ export default class Cart extends Db {
     }
 
     await this.write();
-    this.get(res);
+    this.get(res, 201);
   }
 
   async write() {

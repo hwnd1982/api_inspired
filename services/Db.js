@@ -5,7 +5,8 @@ export default class Db {
     this.data = data;
   }
 
-  get(res) {
+  get(res, status = 200) {
+    res.statusCode = status;
     res.end(JSON.stringify(this.data));
   }
 

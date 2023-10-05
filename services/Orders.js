@@ -26,10 +26,9 @@ export default class Orders extends Db {
     this.data.push(data);
     await this.write();
 
-    res.statusCode = 201;
     res.setHeader("Access-Control-Expose-Headers", "Location");
     res.setHeader("Location", `${URL_ORDERS_PREFIX}/${data.id}`);
-    res.end(JSON.stringify(this.data));
+    this.get(res, 201)
   }
 
   async write() {
