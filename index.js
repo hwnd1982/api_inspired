@@ -12,7 +12,7 @@ import ParserUrl from "./services/ParserUrl.js";
 import Cart from './services/Cart.js';
 import { drainJson, getParams } from './utils/utils.js';
 import { printInstructions } from './utils/printInstructions.js';
-import { readFile } from 'fs';
+import { readFile } from 'node:fs';
 
 const PORT = process.env.PORT || 8024;
 const URL_GOODS_PREFIX = process.env.URL_GOODS_PREFIX;
@@ -84,11 +84,11 @@ createServer(async (req, res) => {
 
     if (isCart) {
       if(isPost || isPatch) {
-        dbCart.add(await drainJson(req));
+        dbCart.add(await drainJson(req), res);
       }
 
       if(isDel) {
-        dbCart.del(await drainJson(req));
+        dbCart.del(await drainJson(req), res);
       }
 
       return dbCart.get(res);
