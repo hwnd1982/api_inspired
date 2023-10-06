@@ -67,7 +67,7 @@ export default class Goods extends Db {
       this.error(403, "Not gender params");
     }
     
-    this.data = this.data.filter((item) => item.category === params.category);
+    this.data = this.data.filter((item) => item.category === this.params.category);
 
     if (this.params.top) {
       this.data = this.data.filter((item) => item.top && item.id !== this.params.exclude);
