@@ -27,6 +27,8 @@ export default class Goods extends Db {
     }
     
     this.filterByColors();
+    this.filterByMinPrice();
+    this.filterByMaxPrice();
 
     return this;
   }
